@@ -20,8 +20,8 @@ Route::get('/', function () {
         die("Could not connect".$e);
     }
 });
-
-Route::get('/post', 'PostController@index');
+//Cuando se utiliza resource se agiliza la codificación
+Route::resource('post', 'PostController');
 
 //Definir rutas agrupadas en una ruta padre
 Route::group(['prefix' => 'admin'], function () {
