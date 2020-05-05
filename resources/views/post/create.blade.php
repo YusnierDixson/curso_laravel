@@ -1,0 +1,26 @@
+@extends('welcome')
+@section('title',"Create post")
+
+
+@section('content')
+<form action="{{ route('post.store') }}" method="post">
+    @csrf
+    <div class="row justify-content-center">
+        <div class="col-sm-7">
+            <div class="form-group">
+                <label for="title">Titulo</label>
+                <input type="text" name="title" id="title" class="form-control" placeholder="Titulo">
+            </div>
+            <div class="form-group">
+                <label for="content">Contenido</label>
+                <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-7 text-center">
+            <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+        </div>
+
+    </div>
+
+</form>
+@endsection

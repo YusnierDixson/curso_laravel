@@ -16,9 +16,6 @@
 
 
 
-    @section('sidebar')
 
-    <h3>Sidebar</h3>
-    @show
 </body>
 </html>

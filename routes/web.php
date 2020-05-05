@@ -19,7 +19,7 @@ Route::get('/', function () {
     } catch (\Exception $e) {
         die("Could not connect".$e);
     }
-});
+})->middleware('language');
 //Cuando se utiliza resource se agiliza la codificación
 Route::resource('post', 'PostController');
 
