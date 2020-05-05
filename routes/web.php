@@ -39,3 +39,8 @@ Route::get('/views', function () {
 
 
 Route::view('/vue', 'vue');
+/*
+Route::get('/users', function () {
+    dd(App\User::with(['posts'])->first()->posts->first()->id);
+});*/
+
