@@ -44,3 +44,23 @@ Route::get('/users', function () {
     dd(App\User::with(['posts'])->first()->posts->first()->id);
 });*/
 
+use Illuminate\Support\Facades\DB;
+//coleción de datos
+Route::get('/query', function () {
+    $user=DB::table('users')->get();
+    dd($user);
+});
+//me devuelve el primer registro donde coincide
+Route::get('/query-where', function () {
+    $user=DB::table('users')->where('email','nyasia65@example.com')->first();
+    dd($user);
+});
+
+//me devuelve el join entre users y posts
+Route::get('/query-join', function () {
+    $user=DB::table('users')
+    ->join('posts','users.id','posts.user_id')
+    ->select('users.id','users.name','posts.title','posts.content')
+    ->get();
+    dd($user);
+});
