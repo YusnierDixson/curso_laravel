@@ -21,6 +21,8 @@ Route::get('/', function () {
     }
 });
 
+Route::get('/post', 'PostController@index');
+
 //Definir rutas agrupadas en una ruta padre
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/name/{name}',function($name){
