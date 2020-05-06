@@ -20,8 +20,7 @@ Route::get('/', function () {
         die("Could not connect".$e);
     }
 })->middleware('language');
-//Cuando se utiliza resource se agiliza la codificación
-Route::resource('post', 'PostController');
+
 
 //Definir rutas agrupadas en una ruta padre
 Route::group(['prefix' => 'admin'], function () {
@@ -77,6 +76,11 @@ Route::get('/paypal_inye', function (App\Models\Paypal $paypal) {
     return $paypal->doSomething();
 });
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'verified'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+//Cuando se utiliza resource se agiliza la codificación
+Route::resource('post', 'PostController');
+});
