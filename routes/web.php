@@ -66,3 +66,13 @@ Route::get('/query-join', function () {
     ->get();
     dd($user);
 });
+//Estoy accediendo a un Servicio que registre en el service provider
+Route::get('/paypal', function () {
+    $paypal=resolve('App\Models\Paypal');
+    return $paypal->doSomething();
+});
+//Estoy accediendo a un Servicio que registre en el service provider pero inyectando dependencia
+Route::get('/paypal_inye', function (App\Models\Paypal $paypal) {
+
+    return $paypal->doSomething();
+});
