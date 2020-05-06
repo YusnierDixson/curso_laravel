@@ -76,3 +76,7 @@ Route::get('/paypal_inye', function (App\Models\Paypal $paypal) {
 
     return $paypal->doSomething();
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
