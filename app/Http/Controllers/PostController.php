@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
+use App\Http\Requests\UserFormRequest;
 
 class PostController extends Controller
 {
@@ -34,18 +35,8 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserFormRequest $request)
     {
-       //Validación con los elementos del request
-       $validator= Validator::make($request->all(),[
-          'title'=>'required|min:5|max:10',
-          'content'=>'required|min:5|max:50'
-       ]);
-       if ($validator->fails()) {
-           return redirect()->route('post.create')->withErrors($validator)
-           ->withInput();
-       }
-
        $post=new Post();
        $post->title=$request->input('title');
        $post->content=$request->input('content');
