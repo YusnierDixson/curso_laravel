@@ -3,17 +3,29 @@
 
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error )
+                <li>
+                    {{ $error }}
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action="{{ route('post.store') }}" method="post">
     @csrf
     <div class="row justify-content-center">
         <div class="col-sm-7">
             <div class="form-group">
                 <label for="title">Titulo</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Titulo">
+                <input type="text" name="title" id="title" class="form-control" placeholder="Titulo"
+                value="{{ old('title') }}">
             </div>
             <div class="form-group">
                 <label for="content">Contenido</label>
-                <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="content" id="" cols="30" rows="10">{{ old('content') }}</textarea>
             </div>
         </div>
         <div class="col-sm-7 text-center">
