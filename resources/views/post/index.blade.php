@@ -7,6 +7,7 @@
          <h5 class="card-title">{{ $post->title }}</h5>
 
          <p class="card-text">{{ $post->content }}</p>
+         <a href="{{ route('post.show',['post'=>$post]) }}" class="btn btn-primary" >Read more</a>
 
        </div>
     </div>
