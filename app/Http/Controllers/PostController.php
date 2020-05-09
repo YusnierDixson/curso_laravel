@@ -78,6 +78,7 @@ class PostController extends Controller
      */
     public function update(UserFormRequest $request, Post $post)
     {
+        $this->authorize('update',$post);
        $post->title=$request->input('title');
        $post->content=$request->input('content');
 
@@ -93,6 +94,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete',$post);
         $post->delete();
         return redirect()->route('post.my');
     }
