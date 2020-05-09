@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests\UserFormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -41,9 +42,9 @@ class PostController extends Controller
        $post=new Post();
        $post->title=$request->input('title');
        $post->content=$request->input('content');
-       $post->user_id=1;
+       $post->user_id=$request->user()->id;
        $post->save();
-       return $post->id;
+       return redirect()->route('post.show',['post'=>$post]);
     }
 
     /**
@@ -65,7 +66,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit',compact("post"));
     }
 
     /**
@@ -75,9 +76,13 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UserFormRequest $request, Post $post)
     {
-        //
+       $post->title=$request->input('title');
+       $post->content=$request->input('content');
+
+       $post->save();
+       return redirect()->route('post.edit',['post'=>$post])->with('message','Post actualizado');
     }
 
     /**
@@ -88,6 +93,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.my');
+    }
+
+    public function myPosts()
+    {
+        $posts=Auth::user()->posts;
+        return view('post.my',compact("posts"));
     }
 }
