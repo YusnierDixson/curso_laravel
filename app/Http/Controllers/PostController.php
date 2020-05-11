@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests\UserFormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
 {
@@ -55,7 +56,15 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post.show',compact("post"));
+        $counter=0;
+        if (Redis::exists('post:views:'.$post->id)) {
+            Redis::incr('post:views:'.$post->id);
+            $counter=Redis::get('post:views:'.$post->id);
+        } else {
+            Redis::set('post:views:'.$post->id,0);
+        }
+
+        return view('post.show',compact("post","counter"));
     }
 
     /**

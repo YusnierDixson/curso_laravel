@@ -32,12 +32,15 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a href="{{ route('post.index') }}" class="nav-link">Posts</a></li>
                         <li class="nav-item"><a href="{{ route('post.my') }}" class="nav-link">Mis posts</a></li>
                         <li class="nav-item"><a href="{{ route('post.create') }}" class="nav-link">Nueva Entrada</a></li>
 
                     </ul>
+                    @endauth
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
