@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\UserEmailWelcome;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,4 +85,8 @@ Route::group(['middleware' => 'verified'], function () {
     Route::get('/my/posts', 'PostController@myPosts')->name('post.my');
 });
 
+Route::get('/mail', function () {
+    UserEmailWelcome::dispatch(App\User::find(1));
+    return "done";
+});
 
